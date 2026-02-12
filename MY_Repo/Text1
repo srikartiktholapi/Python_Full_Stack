@@ -1,0 +1,61 @@
+from fastapi import FastAPI ,Request
+from fastapi.responses import HTMLResponse,JSONResponse,RedirectResponse
+app = FastAPI()
+# Reading quary parameter 
+@app.get("/submit")
+def save_data(name,age) :
+    return JSONResponse({
+        'message' :f"Hello !! {name} and you're age is {age}"
+    })
+
+#Reading path parameter 
+@app.get("/{name}/submit")
+def save_data(name) :
+    return JSONResponse({
+        'message' :f"Hello !! {name}"
+    })
+
+# Read Payload 
+@app.post("/submit")
+async def save_data(request :Request) :
+    data = await request.json()
+    print(data)
+    return data
+@app.get('/')
+def get_detail():
+    return {
+        'Name' : 'Sri Kartik',
+        'Roll No':'R2'
+    }
+@app.get('/JSON_detail')
+def get_detail():
+    data={
+        'Name' : 'Sri Kartik',
+        'Roll No':'R2'
+    }
+    return JSONResponse(content=data)
+@app.get('/HTTP_detail')
+def get_HTTP_detail():
+    html = '''
+        <!DOCTYPE html>
+        <html>
+<head>
+    <title>My First Webpage</title>
+</head>
+<body>
+
+    <h1>Welcome to My Website</h1>
+    <p>This is my first paragraph of text on this page. HTML is easy to learn and type.</p>
+    <a href="www.w3schools.com">Visit a helpful HTML resource</a>
+
+</body>
+</html>
+ '''
+    return HTMLResponse(html)
+
+@app.get("/redirect_details")
+def redirect_details() :
+    url = "https://leetcode.com/u/Sri_Kartik/"
+    return RedirectResponse(url,status_code=302)
+
+python -m uvicorn main:app --reload

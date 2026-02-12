@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+.venv/
+
+# Windows venv inside project
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+site-packages/
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Environment
+.env
+
+# VS Code
+.vscode/
+
+# Database
+*.sqlite3
